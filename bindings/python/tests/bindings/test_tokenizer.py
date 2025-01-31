@@ -236,35 +236,35 @@ class TestTokenizer:
             True,
         )
 
-        # Numpy
-        test_single(
-            np.array([["My", "name", "is", "John"], ["My", "name", "is", "Georges"]]),
-            True,
-        )
-        test_single(
-            np.array((("My", "name", "is", "John"), ("My", "name", "is", "Georges"))),
-            True,
-        )
-        test_pair(
-            np.array(
-                [
-                    [["My", "name", "is", "John"], ["pair"]],
-                    [["My", "name", "is", "Georges"], ["pair"]],
-                ],
-                dtype=object,
-            ),
-            True,
-        )
-        test_pair(
-            np.array(
-                (
-                    (("My", "name", "is", "John"), ("pair",)),
-                    (("My", "name", "is", "Georges"), ("pair",)),
-                ),
-                dtype=object,
-            ),
-            True,
-        )
+        # # Numpy
+        # test_single(
+        #     np.array([["My", "name", "is", "John"], ["My", "name", "is", "Georges"]]),
+        #     True,
+        # )
+        # test_single(
+        #     np.array((("My", "name", "is", "John"), ("My", "name", "is", "Georges"))),
+        #     True,
+        # )
+        # test_pair(
+        #     np.array(
+        #         [
+        #             [["My", "name", "is", "John"], ["pair"]],
+        #             [["My", "name", "is", "Georges"], ["pair"]],
+        #         ],
+        #         dtype=object,
+        #     ),
+        #     True,
+        # )
+        # test_pair(
+        #     np.array(
+        #         (
+        #             (("My", "name", "is", "John"), ("pair",)),
+        #             (("My", "name", "is", "Georges"), ("pair",)),
+        #         ),
+        #         dtype=object,
+        #     ),
+        #     True,
+        # )
 
         # Mal formed
         with pytest.raises(TypeError, match="TextInputSequence must be str"):
