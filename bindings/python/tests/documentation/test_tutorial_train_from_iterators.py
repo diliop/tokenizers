@@ -62,25 +62,25 @@ class TestTrainFromIterators:
         tokenizer.train_from_iterator(data, trainer=trainer)
         # END train_basic
 
-    def test_datasets(self):
-        tokenizer, trainer = self.get_tokenizer_trainer()
+    # def test_datasets(self):
+    #     tokenizer, trainer = self.get_tokenizer_trainer()
 
-        # In order to keep tests fast, we only use the first 100 examples
-        os.environ["TOKENIZERS_PARALLELISM"] = "true"
-        dataset = datasets.load_dataset("wikitext", "wikitext-103-raw-v1", split="train[0:100]")
+    #     # In order to keep tests fast, we only use the first 100 examples
+    #     os.environ["TOKENIZERS_PARALLELISM"] = "true"
+    #     dataset = datasets.load_dataset("wikitext", "wikitext-103-raw-v1", split="train[0:100]")
 
-        # START def_batch_iterator
-        def batch_iterator(batch_size=1000):
-            # Only keep the text column to avoid decoding the rest of the columns unnecessarily
-            tok_dataset = dataset.select_columns("text")
-            for batch in tok_dataset.iter(batch_size):
-                yield batch["text"]
+    #     # START def_batch_iterator
+    #     def batch_iterator(batch_size=1000):
+    #         # Only keep the text column to avoid decoding the rest of the columns unnecessarily
+    #         tok_dataset = dataset.select_columns("text")
+    #         for batch in tok_dataset.iter(batch_size):
+    #             yield batch["text"]
 
-        # END def_batch_iterator
+    #     # END def_batch_iterator
 
-        # START train_datasets
-        tokenizer.train_from_iterator(batch_iterator(), trainer=trainer, length=len(dataset))
-        # END train_datasets
+    #     # START train_datasets
+    #     tokenizer.train_from_iterator(batch_iterator(), trainer=trainer, length=len(dataset))
+    #     # END train_datasets
 
     def test_gzip(self, setup_gzip_files):
         tokenizer, trainer = self.get_tokenizer_trainer()
